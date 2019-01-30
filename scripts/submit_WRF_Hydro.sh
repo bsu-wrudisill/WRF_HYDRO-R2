@@ -8,6 +8,7 @@
 
 #~~~~~~~~ Source Module Files ~~~~~~~~~~~~~~~~~~~~~
 echo -e "***** Sourcing (loading) default modules \n"
+module purge 
 source ./env_nwm_r2.sh
 
 #~~~~~~ Create a Log file to store timing info and model params ~~~~~~~~~# 

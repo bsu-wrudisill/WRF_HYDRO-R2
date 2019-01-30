@@ -9,7 +9,7 @@
 #           
 
 #~~~~~~~~~~~~~~~~~~~ Create directorys for running and storing data ~~~~~~~~~~~~~~~~~~ # 
-#DATE=`date +%Y-%m-%d:%H:%M:%S`
+DATE=`date +%Y-%m-%d:%H:%M`
 PARENT_DIR="/home/wrudisill/WRF_HYDRO-R2"
 
 #outfiles go here 
@@ -30,7 +30,7 @@ mkdir $RUN_DIR/FORCING $RUN_DIR/DOMAIN $RUN_DIR/RESTART
 #~~~~~~~~~~~~~ Copy executables and namelist files into the run directory ~~~~~~~~~~~~ # 
 # copy wrf_hydro.exe to the run directory 
 cp $PARENT_DIR/wrf_hydro_nwm_public/trunk/NDHMS/Run/wrf_hydro_NoahMP.exe $RUN_DIR/.
-ln -s $RUN_DIR/wrf_hydro_NoahMP.exe $RUN_DIR/wrf_hydro.exe
+#ln -s $RUN_DIR/wrf_hydro_NoahMP.exe $RUN_DIR/wrf_hydro.exe
 
 # copy GENPARM SOILPARM MPTABLE HYDRO CHANPARM tables  
 cp $PARENT_DIR/wrf_hydro_nwm_public/trunk/NDHMS/Run/*.TBL $RUN_DIR/.
