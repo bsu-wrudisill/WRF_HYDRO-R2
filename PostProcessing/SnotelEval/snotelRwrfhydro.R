@@ -45,7 +45,7 @@ print(stationMeta)
 #' 
 #' Pull all SNOTEL observations for the given site for the 2012/2013 years.
 ## ---- results='hide'-----------------------------------------------------
-snoObs <- GetSnotel(stationMeta$site_id,series="Daily",startYr=2012,endYr=2013)
+#snoObs <- GetSnotel(stationMeta$site_id,series="Daily",startYr=2012,endYr=2013)
 
 #' 
 #' Pull modeled SWE at the SNOTEL point from the model directory. For a detailed explanation

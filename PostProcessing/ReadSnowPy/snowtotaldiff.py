@@ -4,18 +4,32 @@ import matplotlib as mpl
 import sys
 from netCDF4 import Dataset 
 import glob
-#
-#
-#dirc="/home/wrudisill/WRF_HYDRO-R2/WRF_HydroRun_HSForcing/Model_Out/*LDASOUT*"
-#flist=glob.glob(dirc)
 
-final_ts_MS="/home/wrudisill/WRF_HYDRO-R2/WRF_HydroRun_LSForcing/Model_Out/199803270000.LDASOUT_DOMAIN2"
-final_ts_HS="/home/wrudisill/WRF_HYDRO-R2/WRF_HydroRun_HSForcing/Model_Out/199803270000.LDASOUT_DOMAIN2"
-diff = Dataset(final_ts_HS)["SNEQV"][0,:,:] - Dataset(final_ts_MS)["SNEQV"][0,:,:]
+#
+#uncoupled="/home/wrudisill/WRF_HYDRO-R2/WRF_HydroRun_ControlControlForcing/Model_Out/199803270000.LDASOUT_DOMAIN2"
+#coupled="/home/wrudisill/scratch/WRF_PROJECTS/MSthesisRuns/wrf_cfsr_1998-03-19_00__1998-03-27_00/wrf_out/wrfout_d02_1998-03-27_00:00:00"
 
-#plt.imshow(diff[::-1,:], cmap="bwr", vmin=-40,vmax=40)
-#plt.colorbar()
+print sys.argv[1]
+def ReadSnow(fname):
+    try:
+        var="SNOW"
+        ds = Dataset(fname)[var][0,:,:] 
+    except:
+        var="SNEQV"
+        ds = Dataset(fname)[var][0,:,:] 
+    finally: 
+        return ds        
+
+diff = ReadSnow(sys.argv[1]) - ReadSnow(sys.argv[2]) 
+
+'''
+Positive Regions (red in the centered bwr colorscheme) mean that the SWE (on the ground) is greater in the WRF-coupled case than in the uncoupled case which was forced by the control forcings. Generally for the HS scenario, positive regions lie on the Western side and negative regions are to the East. There are also areas with red pixels in the 
+'''
+
+
+plt.imshow(diff[::-1,:], cmap="bwr", vmin=-50,vmax=50)
+plt.colorbar()
 #plt.savefig("diff_finalsnow.png")
 #plt.savefig('Ebudget_Whole_D02', dpi=500)
-plt.hist(diff)
-plt.savefig("diffhist.png")
+#plt.show()
+plt.savefig(sys.argv[3])
